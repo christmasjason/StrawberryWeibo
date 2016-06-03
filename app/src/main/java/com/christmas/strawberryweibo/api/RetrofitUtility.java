@@ -1,4 +1,4 @@
-package com.christmas.strawberryweibo.apis;
+package com.christmas.strawberryweibo.api;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;

@@ -5,9 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.christmas.strawberryweibo.apis.RetrofitUtility;
+import com.christmas.strawberryweibo.api.RetrofitUtility;
 import com.christmas.strawberryweibo.infrastructure.Constants;
-import com.christmas.strawberryweibo.uis.activities.WebViewActivity;
+import com.christmas.strawberryweibo.ui.activity.WebViewActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

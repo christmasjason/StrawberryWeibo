@@ -1,4 +1,4 @@
-package com.christmas.strawberryweibo.uis.activities;
+package com.christmas.strawberryweibo.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,23 +8,20 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.christmas.strawberryweibo.R;
-import com.christmas.strawberryweibo.apis.Oauthorize;
-import com.christmas.strawberryweibo.apis.RetrofitUtility;
 import com.christmas.strawberryweibo.infrastructure.Constants;
-import com.christmas.strawberryweibo.presenters.WebViewActivityPresenter;
-import com.christmas.strawberryweibo.presenters.impements.WebViewActivityPresenterImp;
-import com.christmas.strawberryweibo.views.WebViewActivityView;
+import com.christmas.strawberryweibo.model.entity.Oauth2Token;
+import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
+import com.christmas.strawberryweibo.presenter.imp.WebViewActivityPresenterImp;
+import com.christmas.strawberryweibo.utility.ToastUtility;
+import com.christmas.strawberryweibo.view.WebViewActivityView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class WebViewActivity extends AppCompatActivity implements WebViewActivityView {
 
@@ -119,16 +116,8 @@ public class WebViewActivity extends AppCompatActivity implements WebViewActivit
   }
 
   @Override
-  public void getAccessToken(String code) {
-    RetrofitUtility
-        .retrofit
-        .create(Oauthorize.class)
-        .getAccessToken(Constants.APP_KEY, Constants.APP_SECRET, Constants.GRANT_TYPE, code, Constants.REDIRECT_URI)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(oauth2AccessToken -> {
-          Log.d(WebViewActivity.class.getSimpleName(), oauth2AccessToken.toString());
-        });
+  public void setOauth2Token(Oauth2Token oauth2Token) {
+    ToastUtility.showLongToast(this, oauth2Token.toString());
   }
 
   @NonNull

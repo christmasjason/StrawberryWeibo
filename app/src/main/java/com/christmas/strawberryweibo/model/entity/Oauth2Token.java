@@ -1,8 +1,8 @@
-package com.christmas.strawberryweibo.models;
+package com.christmas.strawberryweibo.model.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Oauth2AccessToken {
+public class Oauth2Token {
 
   public static final String KEY_UID = "uid";
   public static final String KEY_ACCESS_TOKEN = "access_token";
@@ -14,9 +14,6 @@ public class Oauth2AccessToken {
   public String accessToken;
   @SerializedName("expires_in")
   public long expiresIn;
-  @Deprecated
-  @SerializedName("remind_in")
-  public String remindIn;
   @SerializedName("uid")
   public String uid;
 
@@ -36,16 +33,6 @@ public class Oauth2AccessToken {
     this.expiresIn = expiresIn;
   }
 
-  @Deprecated
-  public String getRemindIn() {
-    return remindIn;
-  }
-
-  @Deprecated
-  public void setRemindIn(String remindIn) {
-    this.remindIn = remindIn;
-  }
-
   public String getUid() {
     return uid;
   }
@@ -56,10 +43,9 @@ public class Oauth2AccessToken {
 
   @Override
   public String toString() {
-    return "Oauth2AccessToken{" +
+    return "Oauth2Token{" +
         "accessToken='" + accessToken + '\'' +
         ", expiresIn=" + expiresIn +
-        ", remindIn='" + remindIn + '\'' +
         ", uid='" + uid + '\'' +
         '}';
   }

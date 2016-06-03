@@ -1,4 +1,4 @@
-package com.christmas.strawberryweibo.Utilities;
+package com.christmas.strawberryweibo.utility;
 
 import android.content.Context;
 import android.widget.Toast;

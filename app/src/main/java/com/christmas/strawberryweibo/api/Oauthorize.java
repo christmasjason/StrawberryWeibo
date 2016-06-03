@@ -1,6 +1,6 @@
-package com.christmas.strawberryweibo.apis;
+package com.christmas.strawberryweibo.api;
 
-import com.christmas.strawberryweibo.models.Oauth2AccessToken;
+import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -10,7 +10,7 @@ import rx.Observable;
 public interface Oauthorize {
   @FormUrlEncoded
   @POST("oauth2/access_token")
-  Observable<Oauth2AccessToken> getAccessToken(
+  Observable<Oauth2Token> getAccessToken(
       @Field("client_id") String clientId,
       @Field("client_secret") String clientSecret,
       @Field("grant_type") String grantType,

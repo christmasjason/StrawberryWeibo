@@ -1,4 +1,4 @@
-package com.christmas.strawberryweibo.presenters;
+package com.christmas.strawberryweibo.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

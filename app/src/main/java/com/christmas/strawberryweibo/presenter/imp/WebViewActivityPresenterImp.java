@@ -15,21 +15,17 @@ public class WebViewActivityPresenterImp implements
     WebViewActivityPresenter,
     OnOauth2TokenListener {
   private WebViewActivityView webViewActivityView;
-  private Oauth2TokenModel oauth2AccessToken;
+  private Oauth2TokenModel tokenModel;
 
   public WebViewActivityPresenterImp(WebViewActivityView webViewActivityView) {
     this.webViewActivityView = webViewActivityView;
-    oauth2AccessToken = new Oauth2TokenModelImp();
+    tokenModel = new Oauth2TokenModelImp();
   }
 
   @Override
   public void handleRedirectedUrl(@NonNull Context context, @NonNull String url) {
     if (!url.contains("error")) {
-      Uri uri = Uri.parse(url);
-
-      String code = uri.getQueryParameter("code");
-
-      oauth2AccessToken.getAccessToken(code, this);
+      tokenModel.getAccessToken(Uri.parse(url).getQueryParameter("code"), this);
 
     } else {
       // TODO: 6/2/16 error 处理

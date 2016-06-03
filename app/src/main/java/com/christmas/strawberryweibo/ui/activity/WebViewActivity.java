@@ -17,6 +17,7 @@ import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
 import com.christmas.strawberryweibo.presenter.imp.WebViewActivityPresenterImp;
+import com.christmas.strawberryweibo.utility.SharedPreferencesUtil;
 import com.christmas.strawberryweibo.utility.ToastUtility;
 import com.christmas.strawberryweibo.view.WebViewActivityView;
 
@@ -118,6 +119,9 @@ public class WebViewActivity extends AppCompatActivity implements WebViewActivit
   @Override
   public void setOauth2Token(Oauth2Token oauth2Token) {
     ToastUtility.showLongToast(this, oauth2Token.toString());
+    SharedPreferencesUtil.put(this, Oauth2Token.KEY_ACCESS_TOKEN, oauth2Token.accessToken);
+    SharedPreferencesUtil.put(this, Oauth2Token.KEY_EXPIRES_IN, oauth2Token.expiresIn);
+    SharedPreferencesUtil.put(this, Oauth2Token.KEY_UID, oauth2Token.uid);
   }
 
   @NonNull

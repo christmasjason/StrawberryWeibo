@@ -6,25 +6,23 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.christmas.strawberryweibo.R;
+import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
 import com.christmas.strawberryweibo.presenter.imp.WebViewActivityPresenterImp;
 import com.christmas.strawberryweibo.utility.SharedPreferencesUtil;
-import com.christmas.strawberryweibo.utility.ToastUtility;
 import com.christmas.strawberryweibo.view.WebViewActivityView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class WebViewActivity extends AppCompatActivity implements WebViewActivityView {
+public class WebViewActivity extends BaseActivity implements WebViewActivityView {
 
   @Bind(R.id.wv_web_view) WebView wvWebView;
 
@@ -39,12 +37,7 @@ public class WebViewActivity extends AppCompatActivity implements WebViewActivit
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    if (!getIntents()) {
-      finish();
-      return;
-    }
-
-    setContentView(R.layout.layout_web_view);
+    getParams();
 
     ButterKnife.bind(this);
 
@@ -53,12 +46,13 @@ public class WebViewActivity extends AppCompatActivity implements WebViewActivit
     initWebView();
   }
 
-  private boolean getIntents() {
+  @Override
+  public int getLayoutRes() {
+    return R.layout.layout_web_view;
+  }
+
+  private void getParams() {
     actionUrl = getIntent().getStringExtra(ACTION_URL);
-    if (TextUtils.isEmpty(actionUrl)) {
-      return false;
-    }
-    return true;
   }
 
   private void initWebView() {
@@ -118,10 +112,9 @@ public class WebViewActivity extends AppCompatActivity implements WebViewActivit
 
   @Override
   public void setOauth2Token(Oauth2Token oauth2Token) {
-    ToastUtility.showLongToast(this, oauth2Token.toString());
     SharedPreferencesUtil.put(this, Oauth2Token.KEY_ACCESS_TOKEN, oauth2Token.accessToken);
-    SharedPreferencesUtil.put(this, Oauth2Token.KEY_EXPIRES_IN, oauth2Token.expiresIn);
-    SharedPreferencesUtil.put(this, Oauth2Token.KEY_UID, oauth2Token.uid);
+    startActivity(MainPageActivity.newIntent(this));
+    finish();
   }
 
   @NonNull

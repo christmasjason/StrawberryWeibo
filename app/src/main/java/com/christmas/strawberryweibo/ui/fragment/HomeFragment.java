@@ -1,20 +1,38 @@
 package com.christmas.strawberryweibo.ui.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.christmas.strawberryweibo.R;
+import com.christmas.strawberryweibo.adapter.PublicStatusesAdapter;
+import com.christmas.strawberryweibo.model.entity.Oauth2Token;
+import com.christmas.strawberryweibo.model.entity.Status;
+import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
+import com.christmas.strawberryweibo.presenter.HomeFragmentPresenter;
+import com.christmas.strawberryweibo.presenter.imp.HomeFragmentPresenterImp;
+import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
+import com.christmas.strawberryweibo.view.HomeFragmentView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeFragmentView {
   @Bind(R.id.rv_public_statuses) RecyclerView rvPublicStatuses;
+
+  private PublicStatusesAdapter publicStatusesAdapter;
+  private List<Status> statusList = new ArrayList<>();
+  private StatusListWrapper statusListWrapper;
+  private HomeFragmentPresenter homeFragmentPresenter;
 
   public static HomeFragment newInstance() {
     return new HomeFragment();
@@ -28,6 +46,11 @@ public class HomeFragment extends Fragment {
 
     ButterKnife.bind(this, rootView);
 
+    homeFragmentPresenter = new HomeFragmentPresenterImp(this);
+
+    homeFragmentPresenter.startLoadPublicStatuses(
+        String.valueOf(SharedPreferencesUtil.get(getActivity(), Oauth2Token.KEY_ACCESS_TOKEN, "")));
+
     return rootView;
   }
 
@@ -39,12 +62,26 @@ public class HomeFragment extends Fragment {
   }
 
   private void initPublicStatusAdapter() {
-
+    publicStatusesAdapter = new PublicStatusesAdapter(getContext(), statusList);
+    rvPublicStatuses.setLayoutManager(new LinearLayoutManager(getContext()));
+    rvPublicStatuses.setAdapter(publicStatusesAdapter);
   }
 
   @Override
   public void onDestroyView() {
     super.onDestroyView();
     ButterKnife.unbind(this);
+  }
+
+  @Override
+  public void refreshPublicStatuses(@NonNull StatusListWrapper statusListWrapper) {
+    this.statusListWrapper = statusListWrapper;
+    this.statusList.addAll(statusListWrapper.statuses);
+    publicStatusesAdapter.notifyDataSetChanged();
+  }
+
+  @Override
+  public void emptyPublicStatuses() {
+
   }
 }

@@ -16,7 +16,7 @@ import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
 import com.christmas.strawberryweibo.presenter.imp.WebViewActivityPresenterImp;
-import com.christmas.strawberryweibo.utility.SharedPreferencesUtil;
+import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
 import com.christmas.strawberryweibo.view.WebViewActivityView;
 
 import butterknife.Bind;

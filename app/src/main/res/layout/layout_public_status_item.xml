@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@color/white"
+    android:padding="10dp">
 
+  <ImageView
+      android:id="@+id/iv_status_owner_avatar"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentTop="true"
+      tools:src="@mipmap/ic_launcher" />
 
+  <TextView
+      android:id="@+id/tv_status_owner_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@+id/iv_status_owner_avatar"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/iv_status_owner_avatar"
+      tools:text="用户名字" />
 
-</LinearLayout>
+  <TextView
+      android:id="@+id/tv_status_publish_time"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@+id/tv_status_owner_name"
+      android:layout_below="@+id/tv_status_owner_name"
+      android:layout_marginTop="3dp"
+      tools:text="发布时间" />
+
+  <TextView
+      android:id="@+id/tv_status_from_device"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignTop="@+id/tv_status_publish_time"
+      android:layout_below="@+id/tv_status_owner_name"
+      android:layout_marginLeft="5dp"
+      android:layout_toRightOf="@+id/tv_status_publish_time"
+      tools:text="来自于" />
+
+  <ImageView
+      android:id="@+id/iv_show_option"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      tools:src="@mipmap/ic_launcher" />
+
+</RelativeLayout>

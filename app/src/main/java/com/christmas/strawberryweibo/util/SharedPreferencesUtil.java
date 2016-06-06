@@ -1,4 +1,4 @@
-package com.christmas.strawberryweibo.utility;
+package com.christmas.strawberryweibo.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

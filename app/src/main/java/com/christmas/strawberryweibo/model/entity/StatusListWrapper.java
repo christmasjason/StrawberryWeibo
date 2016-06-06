@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class StatusList {
+public class StatusListWrapper {
   @SerializedName("previous_cursor") public int previousCursor;
   @SerializedName("total_number") public int totalNumber;
   @SerializedName("next_cursor") public long nextCursor;

@@ -38,7 +38,7 @@ public class MainPageActivity extends BaseActivity {
   private void initHomeFragment() {
     getSupportFragmentManager()
         .beginTransaction()
-        .add(R.id.fl_container, HomeFragment.newInstance())
+        .replace(R.id.fl_container, HomeFragment.newInstance())
         .commit();
 
     setTitle("微博首页");

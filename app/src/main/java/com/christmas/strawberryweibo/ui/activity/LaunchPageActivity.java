@@ -8,7 +8,7 @@ import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.api.RetrofitClient;
 import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
-import com.christmas.strawberryweibo.utility.SharedPreferencesUtil;
+import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
 
 import butterknife.ButterKnife;
 

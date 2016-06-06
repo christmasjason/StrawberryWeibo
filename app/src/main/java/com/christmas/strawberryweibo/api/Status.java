@@ -2,7 +2,7 @@ package com.christmas.strawberryweibo.api;
 
 import android.support.annotation.NonNull;
 
-import com.christmas.strawberryweibo.model.entity.StatusList;
+import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
 
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -14,13 +14,13 @@ import rx.Observable;
 public interface Status {
 
   @GET("2/statuses/public_timeline.json")
-  Observable<StatusList> publicTimeline(
+  Observable<StatusListWrapper> publicTimeline(
       @NonNull @Query("access_token") String accessToken,
       @Query("count") int count,
       @Query("page") int page);
 
   @GET("2/statuses/public_timeline.json")
-  Observable<StatusList> publicTimeline(
+  Observable<StatusListWrapper> publicTimeline(
       @NonNull @Query("access_token") String accessToken,
       @Query("count") int count,
       @Query("page") int page,

@@ -13,7 +13,6 @@ public class ImageLoadUtil {
     Picasso
         .with(context)
         .load(url)
-        .fit()
         .into(imageView);
   }
 
@@ -22,7 +21,6 @@ public class ImageLoadUtil {
     Picasso
         .with(context)
         .load(resId)
-        .fit()
         .into(imageView);
   }
 }

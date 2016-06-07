@@ -9,8 +9,14 @@ public class Status {
   @SerializedName("in_reply_to_status_id") public String inReplyToStatusId;
   @SerializedName("in_reply_to_user_id") public String inReplyToUserId;
   @SerializedName("in_reply_to_screen_name") public String inReplyToScreenName;
+  @SerializedName("thumbnail_pic") public String thumbnailPic;
+  @SerializedName("bmiddle_pic") public String middlePic;
+  @SerializedName("original_pic") public String originalPic;
   @SerializedName("reposts_count") public int repostsCount;
   @SerializedName("comments_count") public int commentsCount;
+  @SerializedName("source_allowclick") public int sourceAllowClick;
+  @SerializedName("source_type") public int sourceType;
+  @SerializedName("pic_urls") public List<Picture> picUrls;
   public long id;
   public boolean favorited;
   public boolean truncated;

@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.christmas.strawberryweibo.R;
-import com.christmas.strawberryweibo.adapter.PublicStatusesAdapter;
+import com.christmas.strawberryweibo.adapter.StatusesAdapter;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.model.entity.Status;
 import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
@@ -29,10 +29,9 @@ import butterknife.ButterKnife;
 public class HomeFragment extends Fragment implements HomeFragmentView {
   @Bind(R.id.rv_public_statuses) RecyclerView rvPublicStatuses;
 
-  private PublicStatusesAdapter publicStatusesAdapter;
+  private StatusesAdapter publicStatusesAdapter;
   private List<Status> statusList = new ArrayList<>();
   private StatusListWrapper statusListWrapper;
-  private HomeFragmentPresenter homeFragmentPresenter;
 
   public static HomeFragment newInstance() {
     return new HomeFragment();
@@ -46,9 +45,8 @@ public class HomeFragment extends Fragment implements HomeFragmentView {
 
     ButterKnife.bind(this, rootView);
 
-    homeFragmentPresenter = new HomeFragmentPresenterImp(this);
-
-    homeFragmentPresenter.startLoadPublicStatuses(
+    HomeFragmentPresenter homeFragmentPresenter = new HomeFragmentPresenterImp(this);
+    homeFragmentPresenter.startLoadFriendsStatuses(
         String.valueOf(SharedPreferencesUtil.get(getActivity(), Oauth2Token.KEY_ACCESS_TOKEN, "")));
 
     return rootView;
@@ -62,7 +60,7 @@ public class HomeFragment extends Fragment implements HomeFragmentView {
   }
 
   private void initPublicStatusAdapter() {
-    publicStatusesAdapter = new PublicStatusesAdapter(getContext(), statusList);
+    publicStatusesAdapter = new StatusesAdapter(getContext(), statusList);
     rvPublicStatuses.setLayoutManager(new LinearLayoutManager(getContext()));
     rvPublicStatuses.setAdapter(publicStatusesAdapter);
   }

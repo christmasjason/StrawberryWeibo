@@ -34,4 +34,15 @@ public class StatusListModelImp implements StatusListModel {
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(onResponseListener::onSuccess);
   }
+
+  @Override
+  public void friendsTimeline(String accessToken, OnResponseListener onResponseListener) {
+    RetrofitClient
+        .retrofit
+        .create(Status.class)
+        .friendsTimeline(accessToken)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(onResponseListener::onSuccess);
+  }
 }

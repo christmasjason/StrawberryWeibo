@@ -1,7 +1,5 @@
 package com.christmas.strawberryweibo.presenter.imp;
 
-import android.util.Log;
-
 import com.christmas.strawberryweibo.model.OnResponseListener;
 import com.christmas.strawberryweibo.model.StatusListModel;
 import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
@@ -23,6 +21,11 @@ public class HomeFragmentPresenterImp implements
   @Override
   public void startLoadPublicStatuses(String accessToken) {
     statusListModel.publicTimeLine(accessToken, 20, 1, this);
+  }
+
+  @Override
+  public void startLoadFriendsStatuses(String accessToken) {
+    statusListModel.friendsTimeline(accessToken, this);
   }
 
   @Override

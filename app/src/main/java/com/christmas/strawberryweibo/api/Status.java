@@ -25,4 +25,8 @@ public interface Status {
       @Query("count") int count,
       @Query("page") int page,
       @Query("base_app") int baseApp);
+
+  @GET("2/statuses/friends_timeline.json")
+  Observable<StatusListWrapper> friendsTimeline(
+      @NonNull @Query("access_token") String accessToken);
 }

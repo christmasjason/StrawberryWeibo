@@ -19,18 +19,18 @@ public class HomeFragmentPresenterImp implements
   }
 
   @Override
-  public void startLoadPublicStatuses(String accessToken) {
-    statusListModel.publicTimeLine(accessToken, 20, 1, this);
+  public void loadPublicStatuses(String accessToken, int page) {
+    statusListModel.publicTimeLine(accessToken, 20, page, this);
   }
 
   @Override
-  public void startLoadFriendsStatuses(String accessToken) {
+  public void loadFriendsStatuses(String accessToken, int page) {
     statusListModel.friendsTimeline(accessToken, this);
   }
 
   @Override
   public void onSuccess(Object response) {
-    homeFragmentView.refreshPublicStatuses((StatusListWrapper) response);
+    homeFragmentView.updateStatuses((StatusListWrapper) response);
   }
 
   @Override

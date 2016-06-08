@@ -37,7 +37,7 @@ public class CircleImageView extends ImageView {
   private final RectF drawableRect = new RectF();
   private final RectF borderRect = new RectF();
 
-  private final Matrix mShaderMatrix = new Matrix();
+  private final Matrix shaderMatrix = new Matrix();
   private final Paint bitmapPaint = new Paint();
   private final Paint borderPaint = new Paint();
   private final Paint fillPaint = new Paint();
@@ -47,7 +47,7 @@ public class CircleImageView extends ImageView {
   private int fillColor = DEFAULT_FILL_COLOR;
 
   private Bitmap bitmap;
-  private BitmapShader mBitmapShader;
+  private BitmapShader bitmapShader;
   private int bitmapWidth;
   private int bitmapHeight;
 
@@ -280,10 +280,10 @@ public class CircleImageView extends ImageView {
       return;
     }
 
-    mBitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+    bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
     bitmapPaint.setAntiAlias(true);
-    bitmapPaint.setShader(mBitmapShader);
+    bitmapPaint.setShader(bitmapShader);
 
     borderPaint.setStyle(Paint.Style.STROKE);
     borderPaint.setAntiAlias(true);
@@ -328,7 +328,7 @@ public class CircleImageView extends ImageView {
     float dx = 0;
     float dy = 0;
 
-    mShaderMatrix.set(null);
+    shaderMatrix.set(null);
     if (bitmapWidth * drawableRect.height() > drawableRect.width() * bitmapHeight) {
       scale = drawableRect.height() / (float) bitmapHeight;
       dx = (drawableRect.width() - bitmapWidth * scale) * 0.5f;
@@ -337,9 +337,9 @@ public class CircleImageView extends ImageView {
       dy = (drawableRect.height() - bitmapHeight * scale) * 0.5f;
     }
 
-    mShaderMatrix.setScale(scale, scale);
-    mShaderMatrix.postTranslate((int) (dx + 0.5f) + drawableRect.left, (int) (dy + 0.5f) + drawableRect.top);
+    shaderMatrix.setScale(scale, scale);
+    shaderMatrix.postTranslate((int) (dx + 0.5f) + drawableRect.left, (int) (dy + 0.5f) + drawableRect.top);
 
-    mBitmapShader.setLocalMatrix(mShaderMatrix);
+    bitmapShader.setLocalMatrix(shaderMatrix);
   }
 }

@@ -13,7 +13,13 @@ import java.util.TimeZone;
 
 public class TimeUtil {
 
-  // Convert date format as "Tue Jun 07 13:31:42 +0800 2016" to time flies.
+  /**
+   * Convert date format as "Tue Jun 07 13:31:42 +0800 2016" to time flies.
+   *
+   * @param date format as "Tue Jun 07 13:31:42 +0800 2016"
+   * @return time flies.
+   * @see #secondToTime(long)
+   */
   public static String convertDateToTimeFlies(@NonNull String date) {
     DateFormat inputFormat = new SimpleDateFormat("dd MMM HH:mm:ss Z yyyy", Locale.US);
     inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -36,7 +42,6 @@ public class TimeUtil {
   public static String secondToTime(long milliSecond) {
     Date now = new Date();
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-    // get date format yyyy-MM-dd by MS.
     String date = simpleDateFormat.format(milliSecond);
 
     long between = now.getTime() - milliSecond;
@@ -58,9 +63,5 @@ public class TimeUtil {
       result = String.valueOf(second) + "秒前";
     }
     return result;
-  }
-
-  public static boolean isBlank(String string) {
-    return string == null || string.trim().length() == 0;
   }
 }

@@ -8,4 +8,5 @@ public interface StatusListModel {
       String accessToken, int count, int page, int baseApp,
       OnResponseListener onResponseListener);
   void friendsTimeline(String accessToken, OnResponseListener onResponseListener);
+  void friendsTimeline(String accessToken, int page, OnResponseListener onResponseListener);
 }

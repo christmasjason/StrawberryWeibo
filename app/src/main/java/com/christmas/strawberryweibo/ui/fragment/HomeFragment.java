@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,12 +27,18 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment implements HomeFragmentView {
+public class HomeFragment extends Fragment implements
+    HomeFragmentView,
+    SwipeRefreshLayout.OnRefreshListener {
   @Bind(R.id.rv_public_statuses) RecyclerView rvPublicStatuses;
+  @Bind(R.id.srl_statuses_wrapper) SwipeRefreshLayout srlStatusesWrapper;
 
   private StatusesAdapter publicStatusesAdapter;
   private List<Status> statusList = new ArrayList<>();
   private StatusListWrapper statusListWrapper;
+  private HomeFragmentPresenter homeFragmentPresenter;
+  private boolean loading = false;
+  private int currentPage = 1;
 
   public static HomeFragment newInstance() {
     return new HomeFragment();
@@ -45,10 +52,6 @@ public class HomeFragment extends Fragment implements HomeFragmentView {
 
     ButterKnife.bind(this, rootView);
 
-    HomeFragmentPresenter homeFragmentPresenter = new HomeFragmentPresenterImp(this);
-    homeFragmentPresenter.startLoadFriendsStatuses(
-        String.valueOf(SharedPreferencesUtil.get(getActivity(), Oauth2Token.KEY_ACCESS_TOKEN, "")));
-
     return rootView;
   }
 
@@ -56,13 +59,34 @@ public class HomeFragment extends Fragment implements HomeFragmentView {
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
 
+    homeFragmentPresenter = new HomeFragmentPresenterImp(this);
     initPublicStatusAdapter();
+    srlStatusesWrapper.setOnRefreshListener(this);
+    onRefresh();
   }
 
   private void initPublicStatusAdapter() {
     publicStatusesAdapter = new StatusesAdapter(getContext(), statusList);
-    rvPublicStatuses.setLayoutManager(new LinearLayoutManager(getContext()));
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+    rvPublicStatuses.setLayoutManager(linearLayoutManager);
     rvPublicStatuses.setAdapter(publicStatusesAdapter);
+    rvPublicStatuses.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override
+      public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        // Scroll down.
+        if (dy > 0) {
+          int totalItemCount = linearLayoutManager.getItemCount();
+          int firstVisiblePosition = linearLayoutManager.findFirstVisibleItemPosition();
+          int visibleItemCount = linearLayoutManager.getChildCount();
+          if (!loading && ((visibleItemCount + firstVisiblePosition) >= totalItemCount)) {
+            loading = true;
+            homeFragmentPresenter.loadFriendsStatuses(
+                String.valueOf(SharedPreferencesUtil.get(getActivity(), Oauth2Token.KEY_ACCESS_TOKEN, "")), currentPage);
+          }
+        }
+      }
+    });
   }
 
   @Override
@@ -72,14 +96,28 @@ public class HomeFragment extends Fragment implements HomeFragmentView {
   }
 
   @Override
-  public void refreshPublicStatuses(@NonNull StatusListWrapper statusListWrapper) {
+  public void updateStatuses(@NonNull StatusListWrapper statusListWrapper) {
+    loading = false;
+    if (srlStatusesWrapper != null) {
+      srlStatusesWrapper.setRefreshing(false);
+    }
+    currentPage++;
     this.statusListWrapper = statusListWrapper;
     this.statusList.addAll(statusListWrapper.statuses);
     publicStatusesAdapter.notifyDataSetChanged();
   }
 
   @Override
-  public void emptyPublicStatuses() {
+  public void emptyStatuses() {
+    loading = false;
+  }
 
+  @Override
+  public void onRefresh() {
+    loading = true;
+    currentPage = 1;
+    this.statusList.clear();
+    homeFragmentPresenter.loadFriendsStatuses(
+        String.valueOf(SharedPreferencesUtil.get(getActivity(), Oauth2Token.KEY_ACCESS_TOKEN, "")), currentPage);
   }
 }

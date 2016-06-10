@@ -57,6 +57,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@+id/iv_status_owner_avatar"
+      android:layout_marginBottom="5dp"
+      android:layout_marginTop="5dp"
       android:lineSpacingMultiplier="1.2"
       tools:text="文本" />
 

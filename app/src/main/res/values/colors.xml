@@ -5,4 +5,46 @@
   <color name="colorAccent">#FF4081</color>
 
   <color name="white">#ffffffff</color>
+
+  <!-- 文字颜色 -->
+  <color name="font_color_0">#000000</color>
+  <color name="font_color_1">#565a5c</color>
+  <color name="font_color_2">#82898d</color>
+  <color name="font_color_3">#c0c1c9</color>
+  <color name="font_color_4">#ffffff</color>
+  <color name="font_color_5">#4285f4</color>
+  <color name="font_color_6">#ed6849</color>
+  <color name="font_color_7">#f7c411</color>
+  <color name="font_color_8">#55b066</color>
+  <color name="font_color_9">#999999</color>
+  <color name="font_color_10">#616475</color>
+  <!-- 文字颜色 -->
+
+  <!-- 背景颜色 -->
+  <color name="bg_color_1">#eeeeee</color>
+  <color name="bg_color_2">#fafafa</color>
+  <color name="bg_color_3">#ffffff</color>
+  <color name="bg_color_4">#323247</color>
+  <color name="bg_color_5">#2d2d40</color>
+  <color name="bg_color_6">#262632</color>
+  <color name="bg_color_7">#4285f4</color>
+  <color name="bg_color_8">#ed6849</color>
+  <color name="bg_color_9">#cccccc</color>
+  <color name="bg_color_10">#ed6849</color>
+  <color name="bg_color_11">#ed6849</color>
+  <!-- 背景颜色 -->
+
+  <!-- 边框颜色 -->
+  <color name="border_color_1">#e8e8e8</color>
+  <color name="border_color_2">#d8d8d8</color>
+  <color name="border_color_3">#6a6a7a</color>
+  <color name="border_color_4">#4285f4</color>
+  <!-- 边框颜色 -->
+
+  <!-- ICON颜色规范 -->
+  <color name="icon_color_1">#ffffff</color>
+  <color name="icon_color_2">#4285f4</color>
+  <color name="icon_color_3">#c0c1c9</color>
+  <!-- ICON颜色规范 -->
+
 </resources>

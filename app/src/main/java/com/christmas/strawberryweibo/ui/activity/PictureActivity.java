@@ -7,9 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 
 import com.christmas.strawberryweibo.R;
+import com.christmas.strawberryweibo.adapter.FragmentAdapter;
 import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.presenter.PictureActivityPresenter;
 import com.christmas.strawberryweibo.presenter.imp.PictureActivityPresenterImp;
+import com.christmas.strawberryweibo.ui.fragment.PictureFragment;
 import com.christmas.strawberryweibo.view.PictureActivityView;
 
 import java.util.ArrayList;
@@ -27,7 +29,7 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
 
   @Override
   public int getLayoutRes() {
-    return R.layout.layout_show_image;
+    return R.layout.layout_picture;
   }
 
   @Override
@@ -39,6 +41,8 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
     initViews();
 
     showImageActivityPresenter = new PictureActivityPresenterImp(this);
+
+    initFragments();
   }
 
   private void getIntents() {
@@ -49,11 +53,36 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
     ButterKnife.bind(this);
   }
 
+  private void initFragments() {
+    FragmentAdapter fragmentAdapter = new FragmentAdapter(getSupportFragmentManager());
+
+    int size = imageUrls.size();
+    for (int index = 0; index < size; index++) {
+      fragmentAdapter.addFragment(PictureFragment.newInstance(imageUrls.get(index)), (index + 1) + "/" + size);
+    }
+
+    vpImage.setAdapter(fragmentAdapter);
+    vpImage.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+      @Override
+      public void onPageSelected(int position) {
+        setTitle(vpImage.getAdapter().getPageTitle(position));
+      }
+    });
+    vpImage.setCurrentItem(0);
+  }
+
   public static Intent newIntent(@NonNull Context context, @NonNull ArrayList<String> imageUrls) {
     Intent intent = new Intent(context, PictureActivity.class);
     intent.putStringArrayListExtra(IMAGE_URLS, imageUrls);
     return intent;
   }
+
+  public static Intent newIntent(@NonNull Context context, @NonNull String imageUrl) {
+    ArrayList<String> list = new ArrayList<>();
+    list.add(imageUrl);
+    return newIntent(context, list);
+  }
+
 
   @Override
   public void saveImageLocalSuccess(String savePath) {

@@ -10,20 +10,23 @@
         android:label="@string/appName"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.LaunchPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+      <activity android:name=".ui.activity.LaunchPageActivity">
+          <intent-filter>
+              <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.activity.MainPageActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.WebViewActivity"
-            android:screenOrientation="portrait" />
+              <category android:name="android.intent.category.LAUNCHER" />
+          </intent-filter>
+      </activity>
+      <activity
+          android:name=".ui.activity.MainPageActivity"
+          android:launchMode="singleTask"
+          android:screenOrientation="portrait" />
+      <activity
+          android:name=".ui.activity.WebViewActivity"
+          android:screenOrientation="portrait" />
+      <activity
+          android:name=".ui.activity.PictureActivity"
+          android:screenOrientation="portrait" />
     </application>
 
 </manifest>

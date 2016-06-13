@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.model.entity.Status;
+import com.christmas.strawberryweibo.ui.activity.PictureActivity;
 import com.christmas.strawberryweibo.util.ImageLoadUtil;
 import com.christmas.strawberryweibo.util.TimeUtil;
 import com.christmas.strawberryweibo.widget.CircleImageView;
@@ -45,7 +46,7 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-    Status status = statusList.get(position);
+    final Status status = statusList.get(position);
     StatusViewHolder statusViewHolder = (StatusViewHolder) viewHolder;
     statusViewHolder.tvStatusPublishTime.setText(TimeUtil.convertDateToTimeFlies(status.createdAt));
     statusViewHolder.tvStatusSource.setText(String.format("来自 %s", Html.fromHtml(status.source)));
@@ -54,8 +55,11 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       statusViewHolder.ivMiddlePic.setVisibility(View.VISIBLE);
       ImageLoadUtil.loadImageFromString(
           context, status.middlePic, statusViewHolder.ivMiddlePic);
+      statusViewHolder.ivMiddlePic.setOnClickListener(view -> context.startActivity(
+          PictureActivity.newIntent(context, status.middlePic)));
     } else {
       statusViewHolder.ivMiddlePic.setVisibility(View.GONE);
+      statusViewHolder.ivMiddlePic.setOnClickListener(null);
     }
 
     if (status.user != null) {

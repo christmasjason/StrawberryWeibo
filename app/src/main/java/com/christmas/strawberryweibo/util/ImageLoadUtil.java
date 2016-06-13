@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 public class ImageLoadUtil {
   public static void loadImageFromString(
@@ -22,5 +23,13 @@ public class ImageLoadUtil {
         .with(context)
         .load(resId)
         .into(imageView);
+  }
+
+  public static void loadImageFromString(
+      @NonNull Context context, @NonNull String url, @NonNull Target target) {
+    Picasso
+        .with(context)
+        .load(url)
+        .into(target);
   }
 }

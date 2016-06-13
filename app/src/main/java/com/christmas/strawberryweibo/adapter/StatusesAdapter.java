@@ -61,7 +61,7 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     if (status.user != null) {
       statusViewHolder.tvStatusOwnerName.setText(status.user.name);
       ImageLoadUtil.loadImageFromString(
-          context, status.user.profileImageUrl, statusViewHolder.ivStatusOwnerAvatar);
+          context, status.user.avatarLarge, statusViewHolder.ivStatusOwnerAvatar);
     } else {
       // TODO: 6/6/16 add default image.
     }

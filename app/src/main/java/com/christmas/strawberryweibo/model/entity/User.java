@@ -17,7 +17,9 @@ public class User {
   @SerializedName("profile_image_url") public String profileImageUrl;
   @SerializedName("created_at") public String createdAt;
   @SerializedName("avatar_large") public String avatarLarge;
+  @SerializedName("avatar_hd") public String avatarHd;
   @SerializedName("verified_reason") public String verifiedReason;
+  @SerializedName("verified_type") public int verifiedType;
   public long id;
   public boolean following;
   public boolean verified;

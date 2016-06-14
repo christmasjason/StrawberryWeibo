@@ -17,7 +17,6 @@ import com.christmas.strawberryweibo.view.PictureActivityView;
 import java.util.ArrayList;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class PictureActivity extends BaseActivity implements PictureActivityView {
   @Bind(R.id.vp_image) ViewPager vpImage;
@@ -38,8 +37,6 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
 
     getIntents();
 
-    initViews();
-
     showImageActivityPresenter = new PictureActivityPresenterImp(this);
 
     initFragments();
@@ -47,10 +44,6 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
 
   private void getIntents() {
     imageUrls = getIntent().getStringArrayListExtra(IMAGE_URLS);
-  }
-
-  private void initViews() {
-    ButterKnife.bind(this);
   }
 
   private void initFragments() {

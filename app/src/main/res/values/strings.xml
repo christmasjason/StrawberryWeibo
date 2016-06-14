@@ -1,3 +1,7 @@
 <resources>
-    <string name="appName">StrawberryWeibo</string>
+  <string name="appName">StrawberryWeibo</string>
+
+  <string name="openDrawerDesc">openDrawerDesc</string>
+  <string name="closeDrawerDesc">closeDrawerDesc</string>
+  <string name="mentionMe">mentionMe</string><string name="myComments">我的评论</string>
 </resources>

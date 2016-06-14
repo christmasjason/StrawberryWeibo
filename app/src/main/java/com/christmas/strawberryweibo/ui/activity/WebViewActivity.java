@@ -20,7 +20,6 @@ import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
 import com.christmas.strawberryweibo.view.WebViewActivityView;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class WebViewActivity extends BaseActivity implements WebViewActivityView {
 
@@ -38,8 +37,6 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
     super.onCreate(savedInstanceState);
 
     getParams();
-
-    ButterKnife.bind(this);
 
     webViewActivityPresenter = new WebViewActivityPresenterImp(this);
 

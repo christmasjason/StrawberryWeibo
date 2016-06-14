@@ -22,6 +22,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     setContentView(getLayoutRes());
 
+    ButterKnife.bind(this);
+
     initToolbar();
   }
 

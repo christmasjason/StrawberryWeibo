@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group>
+    <item
+        android:id="@+id/it_mention_me"
+        android:title="@string/mentionMe" />
+    <item
+        android:id="@+id/it_comments"
+        android:title="@string/comments" />
+  </group>
+</menu>

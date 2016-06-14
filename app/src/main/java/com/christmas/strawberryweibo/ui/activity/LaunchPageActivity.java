@@ -10,15 +10,11 @@ import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
 
-import butterknife.ButterKnife;
-
 public class LaunchPageActivity extends BaseActivity {
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    ButterKnife.bind(this);
 
     if (TextUtils.isEmpty(String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_ACCESS_TOKEN, "")))) {
       startActivity(WebViewActivity.newIntent(this, RetrofitClient.OAUTHORIZE_URL));

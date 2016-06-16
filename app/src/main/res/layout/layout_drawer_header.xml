@@ -12,7 +12,8 @@
       android:id="@+id/iv_background"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scaleType="centerCrop" />
+      android:scaleType="centerCrop"
+      android:src="@drawable/bg_drawer_header" />
 
   <TextView
       android:id="@+id/tv_user_name"

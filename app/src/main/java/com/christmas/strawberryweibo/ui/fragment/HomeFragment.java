@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment implements
       @Override
       public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-        // Scroll down.
+        // Scroll up.
         if (dy > 0) {
           int totalItemCount = linearLayoutManager.getItemCount();
           int firstVisiblePosition = linearLayoutManager.findFirstVisibleItemPosition();

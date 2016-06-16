@@ -110,6 +110,7 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
   @Override
   public void setOauth2Token(Oauth2Token oauth2Token) {
     SharedPreferencesUtil.put(this, Oauth2Token.KEY_ACCESS_TOKEN, oauth2Token.accessToken);
+    SharedPreferencesUtil.put(this, Oauth2Token.KEY_UID, oauth2Token.uid);
     startActivity(MainPageActivity.newIntent(this));
     finish();
   }

@@ -21,4 +21,8 @@ public interface Oauthorize {
 
   @GET("oauth2/revokeoauth2")
   Observable<Boolean> revokeOauth2(@Query("access_token") String accessToken);
+
+  @FormUrlEncoded
+  @POST("oauth2/get_token_info")
+  Observable<Oauth2Token> getTokenInfo(@Field("access_token") String accessToken);
 }

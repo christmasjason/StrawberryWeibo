@@ -3,12 +3,15 @@
   <group>
     <item
         android:id="@+id/it_mention_me"
+        android:icon="@drawable/ico_mention"
         android:title="@string/mentionMe" />
     <item
         android:id="@+id/it_comments"
+        android:icon="@drawable/ico_comment"
         android:title="@string/comments" />
     <item
         android:id="@+id/it_favorites"
+        android:icon="@drawable/ico_favorite"
         android:title="@string/favorites" />
   </group>
 </menu>

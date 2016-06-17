@@ -1,59 +1,17 @@
 package com.christmas.strawberryweibo.model.imp;
 
-import com.christmas.strawberryweibo.api.RetrofitClient;
-import com.christmas.strawberryweibo.api.Status;
-import com.christmas.strawberryweibo.model.OnResponseListener;
 import com.christmas.strawberryweibo.model.StatusListModel;
-
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
 
 public class StatusListModelImp implements StatusListModel {
+
   @Override
-  public void publicTimeLine(
-      String accessToken, int count, int page,
-      OnResponseListener onResponseListener) {
-    RetrofitClient
-        .retrofit
-        .create(Status.class)
-        .publicTimeline(accessToken, count, page)
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(onResponseListener::onSuccess);
+  public void savePublicTimeLine() {
+
   }
 
   @Override
-  public void publicTimeLine(
-      String accessToken, int count, int page, int baseApp,
-      OnResponseListener onResponseListener) {
-    RetrofitClient
-        .retrofit
-        .create(Status.class)
-        .publicTimeline(accessToken, count, page, baseApp)
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(onResponseListener::onSuccess);
-  }
+  public void saveFriendsTimeline(StatusListWrapper statusList) {
 
-  @Override
-  public void friendsTimeline(String accessToken, OnResponseListener onResponseListener) {
-    RetrofitClient
-        .retrofit
-        .create(Status.class)
-        .friendsTimeline(accessToken)
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(onResponseListener::onSuccess);
-  }
-
-  @Override
-  public void friendsTimeline(String accessToken, int page, OnResponseListener onResponseListener) {
-    RetrofitClient
-        .retrofit
-        .create(Status.class)
-        .friendsTimeline(accessToken, page)
-        .subscribeOn(Schedulers.newThread())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(onResponseListener::onSuccess);
   }
 }

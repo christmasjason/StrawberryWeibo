@@ -1,5 +1,7 @@
 package com.christmas.strawberryweibo.model;
 
+import com.christmas.strawberryweibo.model.entity.Oauth2Token;
+
 public interface Oauth2TokenModel {
-  void getAccessToken(String code, OnResponseListener onResponseListener);
+  void saveAccessToken(Oauth2Token oauth2Token);
 }

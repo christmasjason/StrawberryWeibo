@@ -1,15 +1,17 @@
 package com.christmas.strawberryweibo.presenter.imp;
 
-import com.christmas.strawberryweibo.model.OnResponseListener;
+import com.christmas.strawberryweibo.api.RetrofitClient;
+import com.christmas.strawberryweibo.api.Status;
 import com.christmas.strawberryweibo.model.StatusListModel;
-import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
 import com.christmas.strawberryweibo.model.imp.StatusListModelImp;
 import com.christmas.strawberryweibo.presenter.HomeFragmentPresenter;
 import com.christmas.strawberryweibo.view.HomeFragmentView;
 
-public class HomeFragmentPresenterImp implements
-    HomeFragmentPresenter,
-    OnResponseListener {
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
+public class HomeFragmentPresenterImp implements HomeFragmentPresenter {
+
   private HomeFragmentView homeFragmentView;
   private StatusListModel statusListModel;
 
@@ -20,21 +22,28 @@ public class HomeFragmentPresenterImp implements
 
   @Override
   public void loadPublicStatuses(String accessToken, int page) {
-    statusListModel.publicTimeLine(accessToken, 20, page, this);
+    RetrofitClient
+        .retrofit
+        .create(Status.class)
+        .publicTimeline(accessToken, 20, page)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(statusListWrapper -> {
+
+        });
   }
 
   @Override
   public void loadFriendsStatuses(String accessToken, int page) {
-    statusListModel.friendsTimeline(accessToken, this);
-  }
-
-  @Override
-  public void onSuccess(Object response) {
-    homeFragmentView.updateStatuses((StatusListWrapper) response);
-  }
-
-  @Override
-  public void onError(String errorMessage) {
-
+    RetrofitClient
+        .retrofit
+        .create(Status.class)
+        .friendsTimeline(accessToken)
+        .subscribeOn(Schedulers.newThread())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(statusListWrapper -> {
+          statusListModel.saveFriendsTimeline(statusListWrapper);
+          homeFragmentView.updateStatuses(statusListWrapper);
+        });
   }
 }

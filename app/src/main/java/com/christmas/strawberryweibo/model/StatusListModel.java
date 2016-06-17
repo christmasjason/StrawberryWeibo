@@ -1,12 +1,8 @@
 package com.christmas.strawberryweibo.model;
 
+import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
+
 public interface StatusListModel {
-  void publicTimeLine(
-      String accessToken, int count, int page,
-      OnResponseListener onResponseListener);
-  void publicTimeLine(
-      String accessToken, int count, int page, int baseApp,
-      OnResponseListener onResponseListener);
-  void friendsTimeline(String accessToken, OnResponseListener onResponseListener);
-  void friendsTimeline(String accessToken, int page, OnResponseListener onResponseListener);
+  void savePublicTimeLine();
+  void saveFriendsTimeline(StatusListWrapper statusList);
 }

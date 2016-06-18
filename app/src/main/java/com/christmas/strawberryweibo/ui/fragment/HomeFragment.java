@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.adapter.StatusesAdapter;
+import com.christmas.strawberryweibo.adapter.decoration.VerticalDivider;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.model.entity.Status;
 import com.christmas.strawberryweibo.model.entity.StatusListWrapper;
@@ -28,9 +30,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class HomeFragment extends Fragment implements
-    HomeFragmentView,
-    SwipeRefreshLayout.OnRefreshListener {
-  @Bind(R.id.rv_public_statuses) RecyclerView rvPublicStatuses;
+    SwipeRefreshLayout.OnRefreshListener,
+    HomeFragmentView {
+
+  @Bind(R.id.rv_friends_statuses) RecyclerView rvFriendsStatuses;
   @Bind(R.id.srl_statuses_wrapper) SwipeRefreshLayout srlStatusesWrapper;
 
   private StatusesAdapter publicStatusesAdapter;
@@ -68,9 +71,11 @@ public class HomeFragment extends Fragment implements
   private void initPublicStatusAdapter() {
     publicStatusesAdapter = new StatusesAdapter(getContext(), statusList);
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-    rvPublicStatuses.setLayoutManager(linearLayoutManager);
-    rvPublicStatuses.setAdapter(publicStatusesAdapter);
-    rvPublicStatuses.addOnScrollListener(new RecyclerView.OnScrollListener() {
+    rvFriendsStatuses.setLayoutManager(linearLayoutManager);
+    rvFriendsStatuses.addItemDecoration(
+        new VerticalDivider(ContextCompat.getColor(getActivity(), R.color.bg_color_1)));
+    rvFriendsStatuses.setAdapter(publicStatusesAdapter);
+    rvFriendsStatuses.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override
       public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);

@@ -29,7 +29,6 @@ public class HomeFragmentPresenterImp implements HomeFragmentPresenter {
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(statusListWrapper -> {
-
         });
   }
 

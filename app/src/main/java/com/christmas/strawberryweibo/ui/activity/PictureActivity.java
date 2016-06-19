@@ -76,7 +76,6 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
     return newIntent(context, list);
   }
 
-
   @Override
   public void saveImageLocalSuccess(String savePath) {
 

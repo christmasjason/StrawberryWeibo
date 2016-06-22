@@ -55,8 +55,9 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
       statusViewHolder.ivMiddlePic.setVisibility(View.VISIBLE);
       ImageLoadUtil.loadImageFromString(
           context, status.middlePic, statusViewHolder.ivMiddlePic);
-      statusViewHolder.ivMiddlePic.setOnClickListener(view -> context.startActivity(
-          PictureActivity.newIntent(context, status.middlePic)));
+      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
+          context.startActivity(
+              PictureActivity.newIntent(context, status.middlePic)));
     } else {
       statusViewHolder.ivMiddlePic.setVisibility(View.GONE);
       statusViewHolder.ivMiddlePic.setOnClickListener(null);

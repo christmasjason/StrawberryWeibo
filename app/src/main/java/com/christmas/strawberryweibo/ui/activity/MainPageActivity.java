@@ -40,6 +40,7 @@ public class MainPageActivity extends BaseActivity implements
 
   private ImageView ivAvatar;
   private TextView tvUserName;
+  private TextView tvMotto;
 
   private MainPageActivityPresenter mainPageActivityPresenter;
 
@@ -72,6 +73,7 @@ public class MainPageActivity extends BaseActivity implements
 
     ivAvatar = ButterKnife.findById(nvMenu.getHeaderView(0), R.id.iv_avatar);
     tvUserName = ButterKnife.findById(nvMenu.getHeaderView(0), R.id.tv_user_name);
+    tvMotto = ButterKnife.findById(nvMenu.getHeaderView(0), R.id.tv_motto);
   }
 
   private void initHomeFragment() {
@@ -103,5 +105,10 @@ public class MainPageActivity extends BaseActivity implements
   public void updateUserInfo(User user) {
     ImageLoadUtil.loadImageFromString(this, user.avatarLarge, ivAvatar);
     tvUserName.setText(user.screenName);
+    if (TextUtils.isEmpty(user.description)) {
+      tvMotto.setText(R.string.mottoDefault);
+    } else {
+      tvMotto.setText(user.description);
+    }
   }
 }

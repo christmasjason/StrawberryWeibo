@@ -82,7 +82,7 @@ public class MainPageActivity extends BaseActivity implements
         .replace(R.id.fl_container, HomeFragment.newInstance())
         .commit();
 
-    setTitle("微博首页");
+    setTitle(R.string.mainPageName);
   }
 
   @NonNull

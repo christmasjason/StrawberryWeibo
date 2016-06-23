@@ -49,7 +49,8 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     final Status status = statusList.get(position);
     StatusViewHolder statusViewHolder = (StatusViewHolder) viewHolder;
     statusViewHolder.tvStatusPublishTime.setText(TimeUtil.convertDateToTimeFlies(status.createdAt));
-    statusViewHolder.tvStatusSource.setText(String.format("来自 %s", Html.fromHtml(status.source)));
+    statusViewHolder.tvStatusSource.setText(
+        context.getString(R.string.weiboFrom, Html.fromHtml(status.source)));
     statusViewHolder.tvStatusContent.setText(status.text);
     if (!TextUtils.isEmpty(status.middlePic)) {
       statusViewHolder.ivMiddlePic.setVisibility(View.VISIBLE);

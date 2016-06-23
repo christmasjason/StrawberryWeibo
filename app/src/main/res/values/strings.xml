@@ -4,6 +4,9 @@
   <string name="openDrawerDesc">openDrawerDesc</string>
   <string name="closeDrawerDesc">closeDrawerDesc</string>
   <string name="mentionMe">mentionMe</string>
-  <string name="comments">我的评论</string>
-  <string name="favorites">我的收藏</string>
+  <string name="comments">Comments</string>
+  <string name="favorites">Favorites</string>
+  <string name="mottoDefault">nothing</string>
+  <string name="mainPageName">mainpage</string>
+  <string name="weiboFrom">from %s</string>
 </resources>

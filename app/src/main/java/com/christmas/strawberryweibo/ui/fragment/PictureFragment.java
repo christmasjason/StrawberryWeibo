@@ -17,6 +17,7 @@ import com.christmas.strawberryweibo.view.PictureFragmentView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class PictureFragment extends Fragment implements PictureFragmentView {
   @Bind(R.id.iv_picture) ImageView ivPicture;
@@ -25,6 +26,7 @@ public class PictureFragment extends Fragment implements PictureFragmentView {
 
   private String imageUrl;
   private PictureFragmentPresenter pictureFragmentPresenter;
+  private OnPicClickListener onPicClickListener;
 
   public static PictureFragment newInstance(@NonNull String imageUrl) {
     PictureFragment pictureFragment = new PictureFragment();
@@ -65,9 +67,24 @@ public class PictureFragment extends Fragment implements PictureFragmentView {
     ivPicture.setImageBitmap(bitmap);
   }
 
+  @OnClick(R.id.iv_picture)
+  protected void clickPicture() {
+    if (onPicClickListener != null) {
+      onPicClickListener.onPicClick();
+    }
+  }
+
   @Override
   public void onDestroyView() {
     super.onDestroyView();
     ButterKnife.unbind(this);
+  }
+
+  public void setPicClickListener(@NonNull OnPicClickListener onPicClickListener) {
+    this.onPicClickListener = onPicClickListener;
+  }
+
+  public interface OnPicClickListener {
+    void onPicClick();
   }
 }

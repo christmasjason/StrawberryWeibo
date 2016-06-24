@@ -18,7 +18,9 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 
-public class PictureActivity extends BaseActivity implements PictureActivityView {
+public class PictureActivity extends BaseActivity implements
+    PictureActivityView,
+    PictureFragment.OnPicClickListener {
   @Bind(R.id.vp_image) ViewPager vpImage;
 
   public static final String IMAGE_URLS = "imageUrls";
@@ -51,7 +53,9 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
 
     int size = imageUrls.size();
     for (int index = 0; index < size; index++) {
-      fragmentAdapter.addFragment(PictureFragment.newInstance(imageUrls.get(index)), (index + 1) + "/" + size);
+      PictureFragment pictureFragment = PictureFragment.newInstance(imageUrls.get(index));
+      fragmentAdapter.addFragment(pictureFragment, (index + 1) + "/" + size);
+      pictureFragment.setPicClickListener(this);
     }
 
     vpImage.setAdapter(fragmentAdapter);
@@ -79,5 +83,10 @@ public class PictureActivity extends BaseActivity implements PictureActivityView
   @Override
   public void saveImageLocalSuccess(String savePath) {
 
+  }
+
+  @Override
+  public void onPicClick() {
+    finish();
   }
 }

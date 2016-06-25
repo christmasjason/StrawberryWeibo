@@ -57,6 +57,10 @@ public class MainPageActivity extends BaseActivity implements
     if (TextUtils.isEmpty(String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_UID, "")))) {
       mainPageActivityPresenter.getTokenInfo(
           String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_ACCESS_TOKEN, "")));
+    } else {
+      mainPageActivityPresenter.getUserInfo(
+          String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_ACCESS_TOKEN, "")),
+          String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_UID, "")));
     }
   }
 

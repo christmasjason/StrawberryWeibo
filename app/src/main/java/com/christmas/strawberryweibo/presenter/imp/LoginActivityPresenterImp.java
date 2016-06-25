@@ -9,19 +9,19 @@ import com.christmas.strawberryweibo.api.RetrofitClient;
 import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.Oauth2TokenModel;
 import com.christmas.strawberryweibo.model.imp.Oauth2TokenModelImp;
-import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
-import com.christmas.strawberryweibo.view.WebViewActivityView;
+import com.christmas.strawberryweibo.presenter.LoginActivityPresenter;
+import com.christmas.strawberryweibo.view.LoginActivityView;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class WebViewActivityPresenterImp implements
-    WebViewActivityPresenter {
-  private WebViewActivityView webViewActivityView;
+public class LoginActivityPresenterImp implements
+    LoginActivityPresenter {
+  private LoginActivityView loginActivityView;
   private Oauth2TokenModel oauth2TokenModel;
 
-  public WebViewActivityPresenterImp(WebViewActivityView webViewActivityView) {
-    this.webViewActivityView = webViewActivityView;
+  public LoginActivityPresenterImp(LoginActivityView loginActivityView) {
+    this.loginActivityView = loginActivityView;
     oauth2TokenModel = new Oauth2TokenModelImp();
   }
 
@@ -38,7 +38,7 @@ public class WebViewActivityPresenterImp implements
           .observeOn(AndroidSchedulers.mainThread())
           .subscribe(oauth2Token -> {
             oauth2TokenModel.saveAccessToken(oauth2Token);
-            webViewActivityView.setOauth2Token(oauth2Token);
+            loginActivityView.setOauth2Token(oauth2Token);
           });
 
     } else {

@@ -17,11 +17,11 @@ public class LaunchPageActivity extends BaseActivity {
     super.onCreate(savedInstanceState);
 
     if (TextUtils.isEmpty(String.valueOf(SharedPreferencesUtil.get(this, Oauth2Token.KEY_ACCESS_TOKEN, "")))) {
-      startActivity(WebViewActivity.newIntent(this, RetrofitClient.OAUTHORIZE_URL));
+      startActivity(LoginActivity.newIntent(this, RetrofitClient.OAUTHORIZE_URL));
     } else {
       startActivity(MainPageActivity.newIntent(this));
-      finish();
     }
+    finish();
   }
 
   @Override

@@ -6,4 +6,5 @@
   <string name="mottoDefault">这家伙很懒，什么也没留下</string>
   <string name="mainPageName">微博首页</string>
   <string name="weiboFrom">来自 %s</string>
+  <string name="weiboAccountLogin">微博账户登录</string>
 </resources>

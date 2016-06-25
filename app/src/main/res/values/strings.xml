@@ -9,4 +9,5 @@
   <string name="mottoDefault">nothing</string>
   <string name="mainPageName">mainpage</string>
   <string name="weiboFrom">from %s</string>
+  <string name="weiboAccountLogin">Weibo Account Login</string>
 </resources>

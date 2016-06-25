@@ -64,8 +64,13 @@ public class HomeFragment extends Fragment implements
 
     homeFragmentPresenter = new HomeFragmentPresenterImp(this);
     initPublicStatusAdapter();
-    srlStatusesWrapper.setOnRefreshListener(this);
+    initRefreshLayout();
     onRefresh();
+  }
+
+  private void initRefreshLayout() {
+    srlStatusesWrapper.setOnRefreshListener(this);
+    srlStatusesWrapper.setColorSchemeColors(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
   }
 
   private void initPublicStatusAdapter() {

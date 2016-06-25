@@ -14,21 +14,21 @@ import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
-import com.christmas.strawberryweibo.presenter.WebViewActivityPresenter;
-import com.christmas.strawberryweibo.presenter.imp.WebViewActivityPresenterImp;
+import com.christmas.strawberryweibo.presenter.LoginActivityPresenter;
+import com.christmas.strawberryweibo.presenter.imp.LoginActivityPresenterImp;
 import com.christmas.strawberryweibo.util.SharedPreferencesUtil;
-import com.christmas.strawberryweibo.view.WebViewActivityView;
+import com.christmas.strawberryweibo.view.LoginActivityView;
 
 import butterknife.Bind;
 
-public class WebViewActivity extends BaseActivity implements WebViewActivityView {
+public class LoginActivity extends BaseActivity implements LoginActivityView {
 
   @Bind(R.id.wv_web_view) WebView wvWebView;
 
   private static final String ACTION_URL = "actionUrl";
   private static final String BLANK_URL = "about:blank";
 
-  private WebViewActivityPresenter webViewActivityPresenter;
+  private LoginActivityPresenter webViewActivityPresenter;
 
   private String actionUrl;
 
@@ -38,14 +38,14 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
 
     getParams();
 
-    webViewActivityPresenter = new WebViewActivityPresenterImp(this);
+    webViewActivityPresenter = new LoginActivityPresenterImp(this);
 
     initWebView();
   }
 
   @Override
   public int getLayoutRes() {
-    return R.layout.layout_web_view;
+    return R.layout.layout_login;
   }
 
   private void getParams() {
@@ -70,7 +70,7 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
           view.stopLoading();
           if (!hasCalledRedirectUrlHandler) {
             hasCalledRedirectUrlHandler = true;
-            webViewActivityPresenter.handleRedirectedUrl(WebViewActivity.this, url);
+            webViewActivityPresenter.handleRedirectedUrl(LoginActivity.this, url);
           }
         } else {
           view.loadUrl(url);
@@ -84,7 +84,7 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
           view.stopLoading();
           if (!hasCalledRedirectUrlHandler) {
             hasCalledRedirectUrlHandler = true;
-            webViewActivityPresenter.handleRedirectedUrl(WebViewActivity.this, url);
+            webViewActivityPresenter.handleRedirectedUrl(LoginActivity.this, url);
           }
           return;
         }
@@ -118,7 +118,7 @@ public class WebViewActivity extends BaseActivity implements WebViewActivityView
   @NonNull
   public static Intent newIntent(
       @NonNull Context context, @NonNull String actionUrl) {
-    Intent intent = new Intent(context, WebViewActivity.class);
+    Intent intent = new Intent(context, LoginActivity.class);
     intent.putExtra(ACTION_URL, actionUrl);
     return intent;
   }

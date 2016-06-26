@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.christmas.strawberryweibo.R;
-import com.christmas.strawberryweibo.api.RetrofitClient;
+import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.infrastructure.BaseActivity;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.util.SharedPreferencesUtil;

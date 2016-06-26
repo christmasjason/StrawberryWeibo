@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 
 import com.christmas.strawberryweibo.api.Oauthorize;
-import com.christmas.strawberryweibo.api.RetrofitClient;
+import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.infrastructure.Constants;
 import com.christmas.strawberryweibo.model.Oauth2TokenModel;
 import com.christmas.strawberryweibo.model.imp.Oauth2TokenModelImp;

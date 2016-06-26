@@ -1,6 +1,6 @@
 package com.christmas.strawberryweibo.presenter.imp;
 
-import com.christmas.strawberryweibo.api.RetrofitClient;
+import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.api.Status;
 import com.christmas.strawberryweibo.model.StatusListModel;
 import com.christmas.strawberryweibo.model.imp.StatusListModelImp;

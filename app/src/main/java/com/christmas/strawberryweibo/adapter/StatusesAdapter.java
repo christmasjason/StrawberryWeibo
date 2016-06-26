@@ -40,7 +40,7 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = layoutInflater.inflate(R.layout.layout_public_status_item, parent, false);
+    View view = layoutInflater.inflate(R.layout.layout_status_item, parent, false);
     return new StatusViewHolder(view);
   }
 

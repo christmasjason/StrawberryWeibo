@@ -1,7 +1,7 @@
 package com.christmas.strawberryweibo.presenter.imp;
 
 import com.christmas.strawberryweibo.api.Oauthorize;
-import com.christmas.strawberryweibo.api.RetrofitClient;
+import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.api.UserApi;
 import com.christmas.strawberryweibo.model.Oauth2TokenModel;
 import com.christmas.strawberryweibo.model.UserInfoModel;

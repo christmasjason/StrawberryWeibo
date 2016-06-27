@@ -2,9 +2,9 @@ package com.christmas.strawberryweibo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.model.entity.Status;
-import com.christmas.strawberryweibo.ui.activity.PictureActivity;
 import com.christmas.strawberryweibo.util.ImageLoadUtil;
 import com.christmas.strawberryweibo.util.TimeUtil;
 import com.christmas.strawberryweibo.widget.CircleImageView;
@@ -52,16 +51,23 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     statusViewHolder.tvStatusSource.setText(
         context.getString(R.string.weiboFrom, Html.fromHtml(status.source)));
     statusViewHolder.tvStatusContent.setText(status.text);
-    if (!TextUtils.isEmpty(status.middlePic)) {
+    if (status.picUrls != null && status.picUrls.size() > 0) {
       statusViewHolder.rvMiddlePic.setVisibility(View.VISIBLE);
-      ImageLoadUtil.loadImageFromString(
-          context, status.middlePic, statusViewHolder.ivMiddlePic);
-      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
-          context.startActivity(
-              PictureActivity.newIntent(context, status.middlePic)));
+//      ImageLoadUtil.loadImageFromString(
+//          context, status.middlePic, statusViewHolder.ivMiddlePic);
+//      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
+//          context.startActivity(
+//              PictureActivity.newIntent(context, status.middlePic)));
+      statusViewHolder.rvMiddlePic.setAdapter(new PictureAdapter(context, status.picUrls));
+      if (status.picUrls.size() == 1 || status.picUrls.size() == 2 || status.picUrls.size() == 4) {
+        statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 2));
+      } else {
+        statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 3));
+      }
+
     } else {
       statusViewHolder.rvMiddlePic.setVisibility(View.GONE);
-      statusViewHolder.ivMiddlePic.setOnClickListener(null);
+//      statusViewHolder.ivMiddlePic.setOnClickListener(null);
     }
 
     if (status.user != null) {

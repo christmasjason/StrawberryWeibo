@@ -13,9 +13,9 @@ public class RetrofitClient {
       RetrofitClient.BASE_URL
           + "oauth2/authorize"
           + "?client_id="
-          + Constants.APP_KEY
+          + Constant.APP_KEY
           + "&redirect_uri="
-          + Constants.REDIRECT_URI;
+          + Constant.REDIRECT_URI;
 
   public static Retrofit retrofit =
       new Retrofit

@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.christmas.strawberryweibo.api.Oauthorize;
 import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
-import com.christmas.strawberryweibo.infrastructure.Constants;
+import com.christmas.strawberryweibo.infrastructure.Constant;
 import com.christmas.strawberryweibo.model.Oauth2TokenModel;
 import com.christmas.strawberryweibo.model.imp.Oauth2TokenModelImp;
 import com.christmas.strawberryweibo.presenter.LoginActivityPresenter;
@@ -33,7 +33,7 @@ public class LoginActivityPresenterImp implements
       RetrofitClient
           .retrofit
           .create(Oauthorize.class)
-          .getAccessToken(Constants.APP_KEY, Constants.APP_SECRET, Constants.GRANT_TYPE, code, Constants.REDIRECT_URI)
+          .getAccessToken(Constant.APP_KEY, Constant.APP_SECRET, Constant.GRANT_TYPE, code, Constant.REDIRECT_URI)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
           .subscribe(oauth2Token -> {

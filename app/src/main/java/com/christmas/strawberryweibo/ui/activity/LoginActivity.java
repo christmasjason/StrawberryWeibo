@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.infrastructure.BaseActivity;
-import com.christmas.strawberryweibo.infrastructure.Constants;
+import com.christmas.strawberryweibo.infrastructure.Constant;
 import com.christmas.strawberryweibo.model.entity.Oauth2Token;
 import com.christmas.strawberryweibo.presenter.LoginActivityPresenter;
 import com.christmas.strawberryweibo.presenter.imp.LoginActivityPresenterImp;
@@ -66,7 +66,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
       @Override
       public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        if (url.startsWith(Constants.REDIRECT_URI)) {
+        if (url.startsWith(Constant.REDIRECT_URI)) {
           view.stopLoading();
           if (!hasCalledRedirectUrlHandler) {
             hasCalledRedirectUrlHandler = true;
@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
 
       @Override
       public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        if (!url.equals(BLANK_URL) && url.startsWith(Constants.REDIRECT_URI)) {
+        if (!url.equals(BLANK_URL) && url.startsWith(Constant.REDIRECT_URI)) {
           view.stopLoading();
           if (!hasCalledRedirectUrlHandler) {
             hasCalledRedirectUrlHandler = true;

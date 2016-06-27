@@ -53,14 +53,14 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         context.getString(R.string.weiboFrom, Html.fromHtml(status.source)));
     statusViewHolder.tvStatusContent.setText(status.text);
     if (!TextUtils.isEmpty(status.middlePic)) {
-      statusViewHolder.ivMiddlePic.setVisibility(View.VISIBLE);
+      statusViewHolder.rvMiddlePic.setVisibility(View.VISIBLE);
       ImageLoadUtil.loadImageFromString(
           context, status.middlePic, statusViewHolder.ivMiddlePic);
       statusViewHolder.ivMiddlePic.setOnClickListener(view ->
           context.startActivity(
               PictureActivity.newIntent(context, status.middlePic)));
     } else {
-      statusViewHolder.ivMiddlePic.setVisibility(View.GONE);
+      statusViewHolder.rvMiddlePic.setVisibility(View.GONE);
       statusViewHolder.ivMiddlePic.setOnClickListener(null);
     }
 
@@ -85,7 +85,7 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Bind(R.id.tv_status_content) TextView tvStatusContent;
     @Bind(R.id.iv_status_owner_avatar) CircleImageView ivStatusOwnerAvatar;
     @Bind(R.id.iv_show_option) ImageView ivShowOption;
-    @Bind(R.id.iv_middle_pic) ImageView ivMiddlePic;
+    @Bind(R.id.rv_middle_pic) RecyclerView rvMiddlePic;
 
     public StatusViewHolder(View itemView) {
       super(itemView);

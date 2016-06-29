@@ -29,38 +29,21 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     if (viewType == SINGLE_PIC_VIEW_TYPE) {
-      return new SinglePicViewHolder(new ImageView(context));
+      return new PictureViewHolder(new ImageView(context), 180, 220);
     } else if (viewType == TWO_FOUR_PIC_VIEW_TYPE) {
-      return new TwoFourPicViewHolder(new ImageView(context));
+      return new PictureViewHolder(new ImageView(context), 180, 180);
     } else {
-      return new OtherCountPicViewHolder(new ImageView(context));
+      return new PictureViewHolder(new ImageView(context), 120, 120);
     }
   }
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-    if (viewHolder instanceof SinglePicViewHolder) {
-      SinglePicViewHolder singlePicViewHolder = (SinglePicViewHolder) viewHolder;
-      ImageLoadUtil.loadImageFromString(
-          context, pictureList.get(position).getBMiddlePicUrl(), singlePicViewHolder.imageViewSingle);
-      singlePicViewHolder.imageViewSingle.setOnClickListener(
-          view -> PictureActivity.newIntent(context, pictureList.get(position).getLargePicUrl()));
-
-    } else if (viewHolder instanceof TwoFourPicViewHolder) {
-      TwoFourPicViewHolder twoFourPicViewHolder = (TwoFourPicViewHolder) viewHolder;
-      ImageLoadUtil.loadImageFromString(
-          context, pictureList.get(position).getBMiddlePicUrl(), twoFourPicViewHolder.imageViewTwoFour);
-      twoFourPicViewHolder.imageViewTwoFour.setOnClickListener(
-          view -> PictureActivity.newIntent(context, pictureList.get(position).getLargePicUrl()));
-
-    } else if (viewHolder instanceof OtherCountPicViewHolder) {
-      OtherCountPicViewHolder otherCountPicViewHolder = (OtherCountPicViewHolder) viewHolder;
-      ImageLoadUtil.loadImageFromString(
-          context, pictureList.get(position).getBMiddlePicUrl(), otherCountPicViewHolder.imageViewOther);
-      otherCountPicViewHolder.imageViewOther.setOnClickListener(
-          view -> PictureActivity.newIntent(context, pictureList.get(position).getLargePicUrl()));
-
-    }
+    PictureViewHolder pictureViewHolder = (PictureViewHolder) viewHolder;
+    ImageLoadUtil.loadImageFromString(
+        context, pictureList.get(position).getBMiddlePicUrl(), pictureViewHolder.imageView);
+    pictureViewHolder.imageView.setOnClickListener(view ->
+        context.startActivity(PictureActivity.newIntent(context, pictureList.get(position).getLargePicUrl())));
   }
 
   @Override
@@ -79,45 +62,17 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     return pictureList == null ? 0 : pictureList.size();
   }
 
-  public class SinglePicViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageViewSingle;
+  public class PictureViewHolder extends RecyclerView.ViewHolder {
+    public ImageView imageView;
 
-    public SinglePicViewHolder(View itemView) {
+    public PictureViewHolder(View itemView, int width, int height) {
       super(itemView);
 
-      imageViewSingle = (ImageView) itemView;
-      imageViewSingle.setScaleType(ImageView.ScaleType.CENTER_CROP);
+      imageView = (ImageView) itemView;
+      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
       RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(
-          ScreenUtil.dp2px(context, 180), ScreenUtil.dp2px(context, 220));
-      imageViewSingle.setLayoutParams(layoutParams);
-    }
-  }
-
-  public class TwoFourPicViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageViewTwoFour;
-
-    public TwoFourPicViewHolder(View itemView) {
-      super(itemView);
-
-      imageViewTwoFour = (ImageView) itemView;
-      imageViewTwoFour.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(
-          ScreenUtil.dp2px(context, 180), ScreenUtil.dp2px(context, 180));
-      imageViewTwoFour.setLayoutParams(layoutParams);
-    }
-  }
-
-  public class OtherCountPicViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageViewOther;
-
-    public OtherCountPicViewHolder(View itemView) {
-      super(itemView);
-
-      imageViewOther = (ImageView) itemView;
-      imageViewOther.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(
-          ScreenUtil.dp2px(context, 120), ScreenUtil.dp2px(context, 120));
-      imageViewOther.setLayoutParams(layoutParams);
+          ScreenUtil.dp2px(context, width), ScreenUtil.dp2px(context, height));
+      imageView.setLayoutParams(layoutParams);
     }
   }
 }

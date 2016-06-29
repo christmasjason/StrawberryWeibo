@@ -2,6 +2,7 @@ package com.christmas.strawberryweibo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 
 import com.christmas.strawberryweibo.R;
 import com.christmas.strawberryweibo.model.entity.Status;
-import com.christmas.strawberryweibo.ui.activity.PictureActivity;
 import com.christmas.strawberryweibo.util.ImageLoadUtil;
 import com.christmas.strawberryweibo.util.TimeUtil;
 import com.christmas.strawberryweibo.widget.CircleImageView;
@@ -52,16 +52,26 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         context.getString(R.string.weiboFrom, Html.fromHtml(status.source)));
     statusViewHolder.tvStatusContent.setText(status.text);
     if (status.picUrls != null && status.picUrls.size() > 0) {
-      statusViewHolder.ivMiddlePic.setVisibility(View.VISIBLE);
-      ImageLoadUtil.loadImageFromString(
-          context, status.picUrls.get(0).getBMiddlePicUrl(), statusViewHolder.ivMiddlePic);
-      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
-          context.startActivity(
-              PictureActivity.newIntent(context, status.picUrls.get(0).getLargePicUrl())));
+      statusViewHolder.rvMiddlePic.setVisibility(View.VISIBLE);
+//      ImageLoadUtil.loadImageFromString(
+//          context, status.picUrls.get(0).getBMiddlePicUrl(), statusViewHolder.ivMiddlePic);
+//      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
+//          context.startActivity(
+//              PictureActivity.newIntent(context, status.picUrls.get(0).getLargePicUrl())));
+
+      if (status.picUrls.size() == 1) {
+        statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 1));
+      } else if (status.picUrls.size() == 2 || status.picUrls.size() == 4) {
+        statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 2));
+      } else {
+        statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 3));
+      }
+
+      statusViewHolder.rvMiddlePic.setAdapter(new PictureAdapter(context, status.picUrls));
 
     } else {
-      statusViewHolder.ivMiddlePic.setVisibility(View.GONE);
-      statusViewHolder.ivMiddlePic.setOnClickListener(null);
+      statusViewHolder.rvMiddlePic.setVisibility(View.GONE);
+//      statusViewHolder.ivMiddlePic.setOnClickListener(null);
     }
 
     if (status.user != null) {
@@ -85,7 +95,7 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Bind(R.id.tv_status_content) TextView tvStatusContent;
     @Bind(R.id.iv_status_owner_avatar) CircleImageView ivStatusOwnerAvatar;
     @Bind(R.id.iv_show_option) ImageView ivShowOption;
-    @Bind(R.id.iv_middle_pic) ImageView ivMiddlePic;
+    @Bind(R.id.rv_middle_pic) RecyclerView rvMiddlePic;
 
     public StatusViewHolder(View itemView) {
       super(itemView);

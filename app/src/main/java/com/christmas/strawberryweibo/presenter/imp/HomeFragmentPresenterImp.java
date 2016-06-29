@@ -1,7 +1,7 @@
 package com.christmas.strawberryweibo.presenter.imp;
 
-import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.api.Status;
+import com.christmas.strawberryweibo.infrastructure.RetrofitClient;
 import com.christmas.strawberryweibo.model.StatusListModel;
 import com.christmas.strawberryweibo.model.imp.StatusListModelImp;
 import com.christmas.strawberryweibo.presenter.HomeFragmentPresenter;
@@ -37,7 +37,7 @@ public class HomeFragmentPresenterImp implements HomeFragmentPresenter {
     RetrofitClient
         .retrofit
         .create(Status.class)
-        .friendsTimeline(accessToken)
+        .friendsTimeline(accessToken, 20, page)
         .subscribeOn(Schedulers.newThread())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe(statusListWrapper -> {

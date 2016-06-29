@@ -120,6 +120,10 @@ public class HomeFragment extends Fragment implements
   @Override
   public void emptyStatuses() {
     loading = false;
+    if (srlStatusesWrapper != null) {
+      srlStatusesWrapper.setRefreshing(false);
+    }
+    currentPage = 1;
   }
 
   @Override

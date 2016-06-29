@@ -69,10 +69,11 @@
       android:textSize="@dimen/font_size_60"
       tools:text="文本" />
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/rv_middle_pic"
+  <ImageView
+      android:id="@+id/iv_middle_pic"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/tv_status_content" />
+      android:layout_below="@+id/tv_status_content"
+      android:scaleType="centerCrop" />
 
 </RelativeLayout>

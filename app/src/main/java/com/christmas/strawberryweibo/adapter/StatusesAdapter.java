@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.christmas.strawberryweibo.R;
+import com.christmas.strawberryweibo.adapter.decoration.GridDivider;
 import com.christmas.strawberryweibo.model.entity.Status;
 import com.christmas.strawberryweibo.util.ImageLoadUtil;
 import com.christmas.strawberryweibo.util.TimeUtil;
@@ -53,11 +54,6 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     statusViewHolder.tvStatusContent.setText(status.text);
     if (status.picUrls != null && status.picUrls.size() > 0) {
       statusViewHolder.rvMiddlePic.setVisibility(View.VISIBLE);
-//      ImageLoadUtil.loadImageFromString(
-//          context, status.picUrls.get(0).getBMiddlePicUrl(), statusViewHolder.ivMiddlePic);
-//      statusViewHolder.ivMiddlePic.setOnClickListener(view ->
-//          context.startActivity(
-//              PictureActivity.newIntent(context, status.picUrls.get(0).getLargePicUrl())));
 
       if (status.picUrls.size() == 1) {
         statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 1));
@@ -67,11 +63,15 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         statusViewHolder.rvMiddlePic.setLayoutManager(new GridLayoutManager(context, 3));
       }
 
+      if (statusViewHolder.rvMiddlePic.getTag() == null ||
+          !(Boolean) statusViewHolder.rvMiddlePic.getTag()) {
+        statusViewHolder.rvMiddlePic.addItemDecoration(new GridDivider());
+        statusViewHolder.rvMiddlePic.setTag(true);
+      }
       statusViewHolder.rvMiddlePic.setAdapter(new PictureAdapter(context, status.picUrls));
 
     } else {
       statusViewHolder.rvMiddlePic.setVisibility(View.GONE);
-//      statusViewHolder.ivMiddlePic.setOnClickListener(null);
     }
 
     if (status.user != null) {

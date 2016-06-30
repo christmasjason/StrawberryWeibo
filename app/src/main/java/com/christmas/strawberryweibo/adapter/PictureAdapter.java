@@ -1,5 +1,6 @@
 package com.christmas.strawberryweibo.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,20 +21,22 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   private Context context;
   private List<Picture> pictureList;
+  private int screenWidth;
 
   public PictureAdapter(Context context, List<Picture> pictureList) {
     this.context = context;
     this.pictureList = pictureList;
+    this.screenWidth = ScreenUtil.getScreenWidth((Activity) context);
   }
 
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     if (viewType == SINGLE_PIC_VIEW_TYPE) {
-      return new PictureViewHolder(new ImageView(context), 180, 220);
+      return new PictureViewHolder(new ImageView(context), ((screenWidth - 50) * 2) / 3, ((screenWidth - 50) * 2) / 3);
     } else if (viewType == TWO_FOUR_PIC_VIEW_TYPE) {
-      return new PictureViewHolder(new ImageView(context), 180, 180);
+      return new PictureViewHolder(new ImageView(context), (screenWidth - 50) / 2, (screenWidth - 50) / 2);
     } else {
-      return new PictureViewHolder(new ImageView(context), 120, 120);
+      return new PictureViewHolder(new ImageView(context), (screenWidth - 50) / 3, (screenWidth - 50) / 3);
     }
   }
 
@@ -70,8 +73,7 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
       imageView = (ImageView) itemView;
       imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(
-          ScreenUtil.dp2px(context, width), ScreenUtil.dp2px(context, height));
+      RecyclerView.LayoutParams layoutParams = new RecyclerView.LayoutParams(width, height);
       imageView.setLayoutParams(layoutParams);
     }
   }

@@ -46,7 +46,7 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     ImageLoadUtil.loadImageFromString(
         context, pictureList.get(position).getBMiddlePicUrl(), pictureViewHolder.imageView);
     pictureViewHolder.imageView.setOnClickListener(view ->
-        context.startActivity(PictureActivity.newIntent(context, pictureList.get(position).getLargePicUrl())));
+        context.startActivity(PictureActivity.newIntent(context, pictureList, position)));
   }
 
   @Override

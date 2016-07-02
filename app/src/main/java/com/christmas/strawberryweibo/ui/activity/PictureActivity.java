@@ -99,12 +99,18 @@ public class PictureActivity extends BaseActivity implements
   }
 
   @Override
+  public void onBackPressed() {
+    finish();
+    overridePendingTransition(-1, android.R.animator.fade_out);
+  }
+
+  @Override
   public void saveImageLocalSuccess(String savePath) {
 
   }
 
   @Override
   public void onPicClick() {
-    finish();
+    onBackPressed();
   }
 }

@@ -2,6 +2,8 @@ package com.christmas.strawberryweibo.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +47,14 @@ public class PictureAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     PictureViewHolder pictureViewHolder = (PictureViewHolder) viewHolder;
     ImageLoadUtil.loadImageFromString(
         context, pictureList.get(position).getBMiddlePicUrl(), pictureViewHolder.imageView);
-    pictureViewHolder.imageView.setOnClickListener(view ->
-        context.startActivity(PictureActivity.newIntent(context, pictureList, position)));
+    pictureViewHolder.imageView.setOnClickListener(view -> {
+      ActivityCompat.startActivity(
+          (Activity) context, PictureActivity.newIntent(context, pictureList, position),
+          ActivityOptionsCompat.makeScaleUpAnimation(
+              pictureViewHolder.imageView,
+              pictureViewHolder.imageView.getMeasuredWidth() / 2,
+              pictureViewHolder.imageView.getMeasuredHeight() / 2, 0, 0).toBundle());
+    });
   }
 
   @Override

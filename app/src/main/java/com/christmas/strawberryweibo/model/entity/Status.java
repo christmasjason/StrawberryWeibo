@@ -17,6 +17,7 @@ public class Status {
   @SerializedName("source_allowclick") public int sourceAllowClick;
   @SerializedName("source_type") public int sourceType;
   @SerializedName("pic_urls") public List<Picture> picUrls;
+  @SerializedName("retweeted_status") public Status retweetedStatus;
   public long id;
   public boolean favorited;
   public boolean truncated;

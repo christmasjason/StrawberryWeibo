@@ -2,6 +2,7 @@ package com.christmas.strawberryweibo.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.christmas.strawberryweibo.R;
@@ -46,11 +48,33 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
   @Override
   public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
-    final Status status = statusList.get(position);
+    Status status = statusList.get(position);
     StatusViewHolder statusViewHolder = (StatusViewHolder) viewHolder;
+
     statusViewHolder.tvStatusPublishTime.setText(TimeUtil.convertDateToTimeFlies(status.createdAt));
     statusViewHolder.tvStatusSource.setText(
         context.getString(R.string.weiboFrom, Html.fromHtml(status.source)));
+
+    if (status.user != null) {
+      statusViewHolder.tvStatusOwnerName.setText(status.user.name);
+      ImageLoadUtil.loadImageFromString(
+          context, status.user.avatarLarge, statusViewHolder.ivStatusOwnerAvatar);
+    } else {
+      // TODO: 6/6/16 add default image.
+    }
+
+    if (status.retweetedStatus == null) {
+      statusViewHolder.tvRetweetedStatusContent.setVisibility(View.GONE);
+      statusViewHolder.llContentPicWrapper.setBackgroundColor(
+          ContextCompat.getColor(context, R.color.bg_color_3));
+    } else {
+      statusViewHolder.tvRetweetedStatusContent.setText(status.text);
+      status = status.retweetedStatus;
+      statusViewHolder.tvRetweetedStatusContent.setVisibility(View.VISIBLE);
+      statusViewHolder.llContentPicWrapper.setBackgroundColor(
+          ContextCompat.getColor(context, R.color.bg_color_2));
+    }
+
     statusViewHolder.tvStatusContent.setText(status.text);
     if (status.picUrls != null && status.picUrls.size() > 0) {
       statusViewHolder.rvMiddlePic.setVisibility(View.VISIBLE);
@@ -73,14 +97,6 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     } else {
       statusViewHolder.rvMiddlePic.setVisibility(View.GONE);
     }
-
-    if (status.user != null) {
-      statusViewHolder.tvStatusOwnerName.setText(status.user.name);
-      ImageLoadUtil.loadImageFromString(
-          context, status.user.avatarLarge, statusViewHolder.ivStatusOwnerAvatar);
-    } else {
-      // TODO: 6/6/16 add default image.
-    }
   }
 
   @Override
@@ -96,6 +112,8 @@ public class StatusesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Bind(R.id.iv_status_owner_avatar) CircleImageView ivStatusOwnerAvatar;
     @Bind(R.id.iv_show_option) ImageView ivShowOption;
     @Bind(R.id.rv_middle_pic) RecyclerView rvMiddlePic;
+    @Bind(R.id.tv_retweeted_status_content) TextView tvRetweetedStatusContent;
+    @Bind(R.id.ll_content_pic_wrapper) LinearLayout llContentPicWrapper;
 
     public StatusViewHolder(View itemView) {
       super(itemView);

@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bg_color_3"
-    android:padding="10dp">
+    android:background="@color/bg_color_3">
 
   <com.christmas.strawberryweibo.widget.CircleImageView
       android:id="@+id/iv_status_owner_avatar"
@@ -12,6 +11,7 @@
       android:layout_height="40dp"
       android:layout_alignParentLeft="true"
       android:layout_alignParentTop="true"
+      android:layout_margin="@dimen/margin_10"
       android:scaleType="centerCrop"
       tools:src="@mipmap/ic_launcher" />
 
@@ -20,7 +20,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignTop="@+id/iv_status_owner_avatar"
-      android:layout_marginLeft="5dp"
+      android:layout_marginLeft="@dimen/margin_10"
       android:layout_toRightOf="@+id/iv_status_owner_avatar"
       android:textColor="@color/font_color_0"
       android:textSize="@dimen/font_size_50"
@@ -43,7 +43,7 @@
       android:layout_height="wrap_content"
       android:layout_alignTop="@+id/tv_status_publish_time"
       android:layout_below="@+id/tv_status_owner_name"
-      android:layout_marginLeft="5dp"
+      android:layout_marginLeft="@dimen/margin_10"
       android:layout_toRightOf="@+id/tv_status_publish_time"
       android:textColor="@color/font_color_2"
       android:textSize="@dimen/font_size_20"
@@ -55,24 +55,53 @@
       android:layout_height="wrap_content"
       android:layout_alignParentRight="true"
       android:layout_alignParentTop="true"
+      android:layout_margin="@dimen/margin_10"
       tools:src="@mipmap/ic_launcher" />
 
   <TextView
-      android:id="@+id/tv_status_content"
+      android:id="@+id/tv_retweeted_status_content"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_below="@+id/iv_status_owner_avatar"
-      android:layout_marginBottom="5dp"
-      android:layout_marginTop="5dp"
+      android:layout_marginBottom="@dimen/margin_10"
+      android:layout_marginTop="@dimen/margin_10"
       android:lineSpacingMultiplier="1.2"
+      android:paddingLeft="@dimen/padding_20"
+      android:paddingRight="@dimen/margin_20"
       android:textColor="@color/font_color_1"
       android:textSize="@dimen/font_size_60"
-      tools:text="文本" />
+      android:visibility="gone"
+      tools:text="转发文本"
+      tools:visibility="visible" />
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/rv_middle_pic"
+  <LinearLayout
+      android:id="@+id/ll_content_pic_wrapper"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/tv_status_content" />
+      android:layout_below="@+id/tv_retweeted_status_content"
+      android:orientation="vertical"
+      android:paddingBottom="@dimen/margin_20"
+      android:paddingLeft="@dimen/margin_20"
+      android:paddingRight="@dimen/margin_20"
+      android:paddingTop="@dimen/margin_10"
+      tools:background="@color/bg_color_2">
+
+    <TextView
+        android:id="@+id/tv_status_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:lineSpacingMultiplier="1.2"
+        android:textColor="@color/font_color_1"
+        android:textSize="@dimen/font_size_60"
+        tools:text="文本" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_middle_pic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+  </LinearLayout>
 
 </RelativeLayout>
